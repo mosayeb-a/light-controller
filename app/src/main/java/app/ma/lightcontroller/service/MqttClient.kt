@@ -1,9 +1,9 @@
 package app.ma.lightcontroller.service
 
-import android.hardware.lights.LightState
 import app.ma.lightcontroller.common.MqttConfig
 import app.ma.lightcontroller.common.MqttConnectionState
 import app.ma.lightcontroller.data.LightCommand
+import app.ma.lightcontroller.data.LightState
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,9 +13,6 @@ import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.polymorphic
-import kotlinx.serialization.modules.subclass
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttToken
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient
