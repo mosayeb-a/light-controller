@@ -19,7 +19,7 @@ smart-light/{deviceId}/state
 
 # Example Messages
 ### 1. Turn the light ON
-**Publish to:** `smart-light/device123/command`
+**Publish to:** `smart-light/light1/command`
 
 **Payload:**
 
@@ -28,17 +28,14 @@ smart-light/{deviceId}/state
 ```
 
 ### 2. Set brightness to 75%
-**Publish to:** `smart-light/device123/brightness`
+**Publish to:** `smart-light/light1/brightness`
 **Payload:**
 ```json
 { "type": "Brightness", "level": 75 }
 ```
 
 ### 3. View current light state
-**Subscribe to:**
-```json
-smart-light/device123/state
-```
+**Subscribe to:** `smart-light/light1/state`
 **Example payload received:**
 ```json
 {
@@ -48,6 +45,8 @@ smart-light/device123/state
   "lastUpdated": 1712345678901
 }
 ```
+
+Note: the device id by default is set it on the `light1` in viewmodel
 
 ## Assumptions
 
