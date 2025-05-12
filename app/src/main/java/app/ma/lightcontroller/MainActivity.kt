@@ -11,7 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import app.ma.lightcontroller.data.LightCommand
 import app.ma.lightcontroller.ui.theme.LightControllerTheme
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,4 +47,13 @@ fun GreetingPreview() {
     LightControllerTheme {
         Greeting("Android")
     }
-}
+}// Json {
+//serializersModule = SerializersModule {
+//    polymorphic(LightCommand::class) {
+//        subclass(LightCommand.Power::class)
+//        subclass(LightCommand.Brightness::class)
+//    }
+//}
+//ignoreUnknownKeys = true
+//encodeDefaults = true
+//}
