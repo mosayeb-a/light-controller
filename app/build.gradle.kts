@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -17,17 +19,35 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+        resourceConfigurations += "en"
     }
 
+    signingConfigs {
+        create("release") {
+            val localProperties = gradleLocalProperties(rootDir, providers)
+
+            storeFile = file(localProperties.getProperty("store_file"))
+            storePassword = localProperties.getProperty("store_password")
+            keyAlias = localProperties.getProperty("key_alias")
+            keyPassword = localProperties.getProperty("key_password")
+        }
+    }
     buildTypes {
-        release {
-            isMinifyEnabled = false
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -62,6 +82,7 @@ dependencies {
     implementation (libs.org.eclipse.paho.android.service)
 
     implementation (libs.kotlinx.serialization.json)
+    implementation("org.slf4j:slf4j-nop:2.0.9")
 
     implementation (libs.koin.android)
     implementation (libs.koin.androidx.compose)
